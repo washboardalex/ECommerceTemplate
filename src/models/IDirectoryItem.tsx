@@ -1,7 +1,7 @@
 export default interface IDirectoryItem {
-    title: String,
-    imageUrl: String,
-    size?: String,
-    id: Number,
-    linkUrl: String
+    title: string,
+    imageUrl: string,
+    size?: string,
+    id: number,
+    linkUrl: string
 }

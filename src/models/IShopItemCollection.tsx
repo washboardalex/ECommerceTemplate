@@ -1,8 +1,8 @@
 import IShopItem from './IShopItem';
 
 export default interface IShopItemCollection {
-    id: Number,
-    title: String,
-    routeName: String,
+    id: number,
+    title: string,
+    routeName: string,
     items: Array<IShopItem>
   }

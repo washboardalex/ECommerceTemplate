@@ -4,7 +4,7 @@ import { Directory } from '../../components/directory/directory.component'
 
 const HomePage = () => {
 
-    let products: Array<String> = ["Hats","Jackets","Sneakers","Womens","Mens"];
+    let products: Array<string> = ["Hats","Jackets","Sneakers","Womens","Mens"];
 
     return (
         <div className='homepage'>

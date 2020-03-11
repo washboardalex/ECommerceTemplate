@@ -11,7 +11,7 @@ class MenuItem extends React.Component<IDirectoryItem & RouteComponentProps> {
         const BgImgStyle: CSS.Properties = { backgroundImage: `url(${imageUrl})` };
     
         return (
-            <div key={id.toString()} className={`${size} menu-item`} >
+            <div className={`${size} menu-item`} >
                 <div className='background-image' style={BgImgStyle} />
                 <div className='content'>
                     <h1 className='title'>{ title.toUpperCase() }</h1>
