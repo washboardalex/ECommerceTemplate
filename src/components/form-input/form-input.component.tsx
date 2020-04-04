@@ -10,9 +10,9 @@ interface IFormProps {
     required?: boolean
 }
 
-const FormInput: React.FunctionComponent<IFormProps> = ({handleChange, label, value, type, required} : IFormProps) => (
+const FormInput: React.FunctionComponent<IFormProps> = ({handleChange, name, label, value, type, required} : IFormProps) => (
     <div className='group'>
-        <input className='form-input' onChange={handleChange} type={type} required={required} />
+        <input className='form-input' name={name} onChange={handleChange} type={type} required={required} />
         {
             label 
             ?
