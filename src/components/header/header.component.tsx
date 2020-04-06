@@ -1,14 +1,29 @@
 import React from 'react';
-import './header.styles.scss';
+
 import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
+import { connect } from 'react-redux';
+
+import { AppState } from '../../redux/_root-reducer';
+
+import './header.styles.scss';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+
 
 interface IHeaderProps {
     currentUser: any
 }
 
-const Header = ({ currentUser } : IHeaderProps) => (
+const mapStateToProps = (state : AppState) => ({
+    currentUser: state.user.currentUser
+});
+
+const Header = ({ currentUser } : IHeaderProps) => {
+    
+    console.log('currentUser : ');
+    console.log(currentUser)
+
+    return (
     <div className='header'>
         <div className='logo-container'>
             <Link to='/'>
@@ -23,7 +38,7 @@ const Header = ({ currentUser } : IHeaderProps) => (
                 CONTACT
             </Link>
             {
-                currentUser 
+                currentUser  !== null
                 ?
                 <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
                 : 
@@ -32,6 +47,6 @@ const Header = ({ currentUser } : IHeaderProps) => (
             }
         </div>    
     </div>  
-);
+)};
 
-export default Header;
+export default connect(mapStateToProps)(Header);
