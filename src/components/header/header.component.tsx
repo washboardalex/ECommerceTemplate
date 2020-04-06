@@ -3,22 +3,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux';
-
 import { AppState } from '../../redux/_root-reducer';
+
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 
 interface IHeaderProps {
-    currentUser: any
+    currentUser: any,
+    hidden: boolean
 }
 
-const mapStateToProps = (state : AppState) => ({
-    currentUser: state.user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden }} : AppState) => ({
+    currentUser, 
+    hidden
 });
 
-const Header = ({ currentUser } : IHeaderProps) => {
+const Header = ({ currentUser, hidden } : IHeaderProps) => {
 
     return (
     <div className='header'>
@@ -42,7 +46,9 @@ const Header = ({ currentUser } : IHeaderProps) => {
                 <Link className='option' to='/signin'>SIGN IN</Link>
 
             }
-        </div>    
+            <CartIcon />
+        </div>
+        {hidden ? null : <CartDropdown />}
     </div>  
 )};
 
