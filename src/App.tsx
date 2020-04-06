@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fArgReturn } from './types/Functions';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
+import { AppState } from './redux/_root-reducer';
 
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
@@ -13,13 +14,17 @@ import SignInAndSignUp from './components/sign-in-and-sign-up/sign-in-and-sign-u
 import './App.css';
 import { Dispatch, AnyAction } from 'redux';
 
+const mapStateToProps = (state : AppState) => ({
+  currentUser: state.user.currentUser
+});
+
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   setCurrentUser: (user: any) => dispatch(setCurrentUser(user))
 });
 
 
 
-class App extends React.Component<ReturnType<typeof mapDispatchToProps>, {}> {
+class App extends React.Component<ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>, {} > {
   
   unsubscribeFromAuth : fArgReturn = () => false; //auth.onAuthStateChanged returns a bool
 
@@ -29,18 +34,12 @@ class App extends React.Component<ReturnType<typeof mapDispatchToProps>, {}> {
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
-      console.log('onAuthStateChanged called');
 
       if (userAuth) {
 
         const userRef : any = await createUserProfileDocument(userAuth);
 
         userRef.get().then((snapShot : any) => {
-
-          console.log('sign in user object is : ', {
-            currentUser: snapShot.id,
-            ...snapShot.data()
-          })
 
           setCurrentUser({
             id: snapShot.id,
@@ -59,17 +58,18 @@ class App extends React.Component<ReturnType<typeof mapDispatchToProps>, {}> {
   }
 
   render() {
+
     return (
       <div>
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route path='/signin' component={SignInAndSignUp} />
+          <Route exact path='/signin' render={() => this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUp />} />
         </Switch>
       </div>
     );
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

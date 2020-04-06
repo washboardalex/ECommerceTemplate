@@ -19,9 +19,6 @@ const mapStateToProps = (state : AppState) => ({
 });
 
 const Header = ({ currentUser } : IHeaderProps) => {
-    
-    console.log('currentUser : ');
-    console.log(currentUser)
 
     return (
     <div className='header'>
