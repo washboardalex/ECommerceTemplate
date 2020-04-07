@@ -1,12 +1,12 @@
 import React from 'react';
-import IShopItemCollection from '../../models/IShopItemCollection';
-import IShopItem from '../../models/IShopItem';
+import ICollectionItemCollection from '../../models/ICollectionItemCollection';
+import ICollectionItem from '../../models/ICollectionItem';
 import CollectionPreview from '../../components/collection-preview/collection-preview.component';
 import SHOP_DATA from '../../_dummydata/shoppingdata';
 
 
 interface IShopPageState {
-    collections: Array<IShopItemCollection>
+    collections: Array<ICollectionItemCollection>
 }
 
 class ShopPage extends React.Component<{},IShopPageState> {
@@ -21,7 +21,7 @@ class ShopPage extends React.Component<{},IShopPageState> {
             <div className='shop-page'>
                 {
                     collections
-                        .map((collection : IShopItemCollection) => (
+                        .map((collection : ICollectionItemCollection) => (
                             <CollectionPreview key={collection.id} { ...collection } />
                         ))
                 }

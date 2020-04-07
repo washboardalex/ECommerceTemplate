@@ -7,13 +7,14 @@ interface ICustomButtonProps {
     children: ReactNode,
     type?:  'submit' | 'reset' | 'button',
     onClick?: fEmptyVoid | fEmptyReturn | fArgVoid | fArgReturn,
+    inverted?: boolean,
     isGoogleSignIn?: boolean
 }
 
-const CustomButton : React.FunctionComponent<ICustomButtonProps> = ({ children, type, onClick, isGoogleSignIn } : ICustomButtonProps) => (
+const CustomButton : React.FunctionComponent<ICustomButtonProps> = ({ children, type, onClick, inverted, isGoogleSignIn } : ICustomButtonProps) => (
     <button 
         type={type} 
-        className={`${isGoogleSignIn ? 'google-sign-in' : '' } custom-button`} 
+        className={`${inverted ? 'inverted' : '' } ${isGoogleSignIn ? 'google-sign-in' : '' } custom-button`} 
         onClick={onClick ? onClick : undefined} 
     >
         { children }

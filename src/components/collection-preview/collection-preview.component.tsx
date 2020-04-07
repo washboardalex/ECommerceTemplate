@@ -1,10 +1,10 @@
 import React from 'react';
 import CollectionItem from '../collection-item/collection-item.component';
 import './collection-preview.styles.scss';
-import IShopItemCollection from '../../models/IShopItemCollection';
-import IShopItem from '../../models/IShopItem';
+import ICollectionItemCollection from '../../models/ICollectionItemCollection';
+import ICollectionItem from '../../models/ICollectionItem';
 
-const CollectionPreview = ({title, items} : IShopItemCollection) => (
+const CollectionPreview = ({title, items} : ICollectionItemCollection) => (
 
     <div className='collection-preview'>
         <h1 className='title'>{title.toUpperCase()}</h1>
@@ -12,8 +12,8 @@ const CollectionPreview = ({title, items} : IShopItemCollection) => (
             {
                 items
                     .filter((item, index) => index < 4)
-                    .map((item: IShopItem) =>(
-                        <CollectionItem key={item.id} {...item} />
+                    .map((item: ICollectionItem) =>(
+                        <CollectionItem key={item.id} item={item} />
                     ))
             }
         </div>

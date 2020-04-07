@@ -1,8 +1,11 @@
-import { ICartState, TOGGLE_CART_HIDDEN } from './cart.types';
+import { ICartState, TOGGLE_CART_HIDDEN, ADD_ITEM } from './cart.types';
+import { addItemToCart } from './cart.utils';
 import IActionWithPayload from '../IActionWithPayload';
+import ICartItem from '../../models/ICartItem';
 
 const INITIAL_STATE : ICartState = {
-    hidden: true
+    hidden: true,
+    cartItems: [] as Array<ICartItem>
 }
 
 const cartReducer = (state : ICartState = INITIAL_STATE, action: IActionWithPayload) => {
@@ -11,6 +14,11 @@ const cartReducer = (state : ICartState = INITIAL_STATE, action: IActionWithPayl
             return { 
                 ...state,
                 hidden: !state.hidden
+            }
+        case ADD_ITEM:
+            return {
+                ...state,
+                cartItems: addItemToCart(state.cartItems, action.payload)
             }
         default:
             return state;
