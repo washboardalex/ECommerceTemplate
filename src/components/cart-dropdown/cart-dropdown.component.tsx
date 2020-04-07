@@ -2,6 +2,7 @@ import React, { Dispatch } from 'react';
 import { connect, MapStateToProps } from 'react-redux';
 import { AppState } from '../../redux/_root-reducer';
 import ICartItem from '../../models/ICartItem';
+import { selectCartItems } from '../../redux/cart/cart.selectors'; 
 
 import CustomButton from '../custom-button/custom-button.component';
 import CartItem from '../cart-item/cart-item.component';
@@ -9,8 +10,8 @@ import CartItem from '../cart-item/cart-item.component';
 import './cart-dropdown.styles.scss';
 
 
-const mapStateToProps = ({ cart: { cartItems } } : AppState) => ({ 
-    cartItems 
+const mapStateToProps = (state : AppState) => ({ 
+    cartItems: selectCartItems(state)
 });
 
 
