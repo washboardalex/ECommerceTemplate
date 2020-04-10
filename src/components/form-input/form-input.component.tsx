@@ -16,9 +16,9 @@ const FormInput: React.FunctionComponent<IFormProps> = ({handleChange, name, lab
         {
             label 
             ?
-        (<label className={`${value.length ? 'shrink' : ''} form-input-label`}>{ label }</label>)
+            (<label className={`${value.length ? 'shrink' : ''} form-input-label`}>{ label }</label>)
             : 
-                null
+            null
         }
     </div>
 );
