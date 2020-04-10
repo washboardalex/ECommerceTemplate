@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuItem from '../menu-item/menu-item.component';
-import IDirectoryItem from '../../models/IDirectoryItem';
+import IDirectoryItem from '../../types/models/IDirectoryItem';
 import './directory.styles.scss';
 
 interface IDirectoryState {

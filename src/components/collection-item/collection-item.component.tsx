@@ -3,23 +3,23 @@ import { Dispatch, AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { addItem } from '../../redux/cart/cart.actions';
 import { fArgReturn } from '../../types/Functions';
-import ICollectionItem from '../../models/ICollectionItem';
+import ICollectionItem from '../../types/models/ICollectionItem';
 
 import CustomButton from '../custom-button/custom-button.component';
 
 import './collection-item.styles.scss';
 
-
-const mapDispatchToProps = (dispatch : Dispatch<AnyAction>) => ({
-    addItem: (item : any) => dispatch(addItem(item))
-})
-
-interface ICollectionItemProps {
-    item: ICollectionItem,
+interface IDispatchProps {
     addItem: fArgReturn
 }
 
-const CollectionItem = ({ item, addItem } : ICollectionItemProps) => {
+interface IReceivedProps {
+    item: ICollectionItem
+}
+
+type CollectionItemProps = IDispatchProps & IReceivedProps
+
+const CollectionItem = ({ item, addItem } : CollectionItemProps) => {
 
     const { name, price, imageUrl } : ICollectionItem = item;
     
@@ -37,5 +37,9 @@ const CollectionItem = ({ item, addItem } : ICollectionItemProps) => {
         </div>
     )
 };
+
+const mapDispatchToProps = (dispatch : Dispatch<AnyAction>) => ({
+    addItem: (item : any) => dispatch(addItem(item))
+});
 
 export default connect(null, mapDispatchToProps)(CollectionItem);

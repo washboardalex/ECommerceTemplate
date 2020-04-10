@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './cart-item.styles.scss';
-import ICartItem from '../../models/ICartItem';
+import ICartItem from '../../types/models/ICartItem';
 
 interface ICartItemComponentProps {
     item: ICartItem

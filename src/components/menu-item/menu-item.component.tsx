@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
-import IDirectoryItem from '../../models/IDirectoryItem';
+import IDirectoryItem from '../../types/models/IDirectoryItem';
 import CSS from 'csstype';
 import './menu-item.styles.scss';
 

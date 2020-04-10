@@ -1,4 +1,4 @@
-import ICartItem from "../../models/ICartItem";
+import ICartItem from "../../types/models/ICartItem";
 
 export const addItemToCart = (cartItems : Array<ICartItem>, cartItemToAdd : ICartItem) => {
     

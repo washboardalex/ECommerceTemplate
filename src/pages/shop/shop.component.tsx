@@ -1,6 +1,6 @@
 import React from 'react';
-import ICollectionItemCollection from '../../models/ICollectionItemCollection';
-import ICollectionItem from '../../models/ICollectionItem';
+import ICollectionItemCollection from '../../types/models/ICollectionItemCollection';
+import ICollectionItem from '../../types/models/ICollectionItem';
 import CollectionPreview from '../../components/collection-preview/collection-preview.component';
 import SHOP_DATA from '../../_dummydata/shoppingdata';
 

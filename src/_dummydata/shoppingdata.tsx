@@ -1,4 +1,4 @@
-import ICollectionItemCollection from '../models/ICollectionItemCollection';
+import ICollectionItemCollection from '../types/models/ICollectionItemCollection';
 
 const SHOP_DATA: Array<ICollectionItemCollection> = [
   {

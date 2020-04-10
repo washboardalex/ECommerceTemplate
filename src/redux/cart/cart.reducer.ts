@@ -1,7 +1,7 @@
 import { ICartState, TOGGLE_CART_HIDDEN, ADD_ITEM } from './cart.types';
 import { addItemToCart } from './cart.utils';
-import IActionWithPayload from '../IActionWithPayload';
-import ICartItem from '../../models/ICartItem';
+import IActionWithPayload from '../../types/models/IActionWithPayload';
+import ICartItem from '../../types/models/ICartItem';
 
 const INITIAL_STATE : ICartState = {
     hidden: true,

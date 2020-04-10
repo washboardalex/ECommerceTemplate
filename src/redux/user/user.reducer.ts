@@ -1,5 +1,5 @@
 import { SET_CURRENT_USER, ICurrentUserState } from './user.types';
-import IActionWithPayload from '../IActionWithPayload';
+import IActionWithPayload from '../../types/models/IActionWithPayload';
 
 
 const INITIAL_STATE : ICurrentUserState = {

@@ -1,8 +1,8 @@
 import React from 'react';
 import CollectionItem from '../collection-item/collection-item.component';
 import './collection-preview.styles.scss';
-import ICollectionItemCollection from '../../models/ICollectionItemCollection';
-import ICollectionItem from '../../models/ICollectionItem';
+import ICollectionItemCollection from '../../types/models/ICollectionItemCollection';
+import ICollectionItem from '../../types/models/ICollectionItem';
 
 const CollectionPreview = ({title, items} : ICollectionItemCollection) => (
 

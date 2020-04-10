@@ -5,26 +5,29 @@ import { fArgReturn } from './types/Functions';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { AppState } from './redux/_root-reducer';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
-import Header from './components/header/header.component';
+import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUp from './components/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import Header from './components/header/header.component';
 
 import './App.css';
 import { Dispatch, AnyAction } from 'redux';
 
-const mapStateToProps = (state : AppState) => ({
-  currentUser: state.user.currentUser
-});
+interface IStateProps {
+  currentUser: any
+}
 
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  setCurrentUser: (user: any) => dispatch(setCurrentUser(user))
-});
+interface IDispatchProps {
+  setCurrentUser: fArgReturn
+}
 
+type AppComponentProps = IStateProps & IDispatchProps; 
 
-
-class App extends React.Component<ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mapStateToProps>, {} > {
+class App extends React.Component<AppComponentProps, {} > {
   
   unsubscribeFromAuth : fArgReturn = () => false; //auth.onAuthStateChanged returns a bool
 
@@ -65,11 +68,24 @@ class App extends React.Component<ReturnType<typeof mapDispatchToProps> & Return
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route exact path='/signin' render={() => this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUp />} />
+          <Route exact path='/checkout' component={CheckoutPage} />
+          <Route 
+            exact 
+            path='/signin' 
+            render={() => this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUp />} 
+          />
         </Switch>
       </div>
     );
   }
 }
+
+const mapStateToProps = createStructuredSelector<AppState, IStateProps>({
+  currentUser: selectCurrentUser
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
+  setCurrentUser: (user: any) => dispatch(setCurrentUser(user))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
