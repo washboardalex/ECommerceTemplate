@@ -5,6 +5,7 @@ import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selector
 import { AppState } from '../../redux/_root-reducer';
 import ICartItem from '../../types/models/ICartItem';
 
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 import './checkout.styles.scss';
@@ -43,6 +44,12 @@ const CheckoutPage = ({ cartItems, total } : ICheckoutPageProps ) => (
         <div className='total'>
             <span>TOTAL: ${total.toFixed(2)}</span>
         </div>
+        <div className='test-warning'>
+            *USE TEST ONLY FOR PAYMENTS*
+            <br />
+            4242 4242 4242 4242 - 01 22 - 123
+        </div>
+        <StripeCheckoutButton price={total} />
     </div>
 );
 
