@@ -1,6 +1,6 @@
 import { ICartState, TOGGLE_CART_HIDDEN, ADD_ITEM, CLEAR_ITEM_FROM_CART, REMOVE_ITEM } from './cart.types';
 import { addItemToCart, removeItemFromCart } from './cart.utils';
-import IActionWithPayload from '../../types/models/IActionWithPayload';
+import IActionWithPayload from '../../types/models/redux/IActionWithPayload';
 import ICartItem from '../../types/models/ICartItem';
 
 const INITIAL_STATE : ICartState = {

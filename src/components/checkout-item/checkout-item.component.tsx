@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { clearItemFromCart, addItem, removeItem } from '../../redux/cart/cart.actions';
 import ICartItem from '../../types/models/ICartItem';
 import { Dispatch, AnyAction } from 'redux';
-import { fArgReturn } from '../../types/Functions';
+import { fArgReturn } from '../../types/FunctionTypes';
 
 import './checkout-item.styles.scss';
 

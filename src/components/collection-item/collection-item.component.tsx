@@ -2,7 +2,7 @@ import React from 'react';
 import { Dispatch, AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { addItem } from '../../redux/cart/cart.actions';
-import { fArgReturn } from '../../types/Functions';
+import { fArgReturn } from '../../types/FunctionTypes';
 import ICollectionItem from '../../types/models/ICollectionItem';
 
 import CustomButton from '../custom-button/custom-button.component';

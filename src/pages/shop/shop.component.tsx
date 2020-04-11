@@ -1,33 +1,24 @@
 import React from 'react';
 import ICollectionItemCollection from '../../types/models/ICollectionItemCollection';
-import ICollectionItem from '../../types/models/ICollectionItem';
 import CollectionPreview from '../../components/collection-preview/collection-preview.component';
-import SHOP_DATA from '../../_dummydata/shoppingdata';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
+import { selectCollections } from '../../redux/shop/shop.selectors';
+import { AppState } from '../../redux/_root-reducer';
+import { RouteComponentProps } from 'react-router';
+import CollectionPage from '../collection/collection.component';
+
+import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
 
 
-interface IShopPageState {
-    collections: Array<ICollectionItemCollection>
-}
+interface IShopPageProps extends RouteComponentProps {}
 
-class ShopPage extends React.Component<{},IShopPageState> {
-
-    state: IShopPageState = { collections: SHOP_DATA }
-
-    render() {
-
-        const { collections } = this.state;
-
-        return (
-            <div className='shop-page'>
-                {
-                    collections
-                        .map((collection : ICollectionItemCollection) => (
-                            <CollectionPreview key={collection.id} { ...collection } />
-                        ))
-                }
-            </div>
-        );
-    }
-}
+const ShopPage = ({ match } : IShopPageProps) => (
+    <div className='shop-page'>
+        <Route exact path={`${match.path}`} component={CollectionsOverview} />
+        <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+    </div>
+);
 
 export default ShopPage;

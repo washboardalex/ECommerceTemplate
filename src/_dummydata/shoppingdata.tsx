@@ -1,7 +1,7 @@
-import ICollectionItemCollection from '../types/models/ICollectionItemCollection';
+import { IShopData } from '../types/models/IShopData';
 
-const SHOP_DATA: Array<ICollectionItemCollection> = [
-  {
+const SHOP_DATA: IShopData = {
+  hats: {
     id: 1,
     title: 'Hats',
     routeName: 'hats',
@@ -62,7 +62,7 @@ const SHOP_DATA: Array<ICollectionItemCollection> = [
       }
     ]
   },
-  {
+  sneakers: {
     id: 2,
     title: 'Sneakers',
     routeName: 'sneakers',
@@ -117,7 +117,7 @@ const SHOP_DATA: Array<ICollectionItemCollection> = [
       }
     ]
   },
-  {
+  jackets: {
     id: 3,
     title: 'Jackets',
     routeName: 'jackets',
@@ -154,7 +154,7 @@ const SHOP_DATA: Array<ICollectionItemCollection> = [
       }
     ]
   },
-  {
+  womens: {
     id: 4,
     title: 'Womens',
     routeName: 'womens',
@@ -203,7 +203,7 @@ const SHOP_DATA: Array<ICollectionItemCollection> = [
       }
     ]
   },
-  {
+  mens: {
     id: 5,
     title: 'Mens',
     routeName: 'mens',
@@ -246,6 +246,6 @@ const SHOP_DATA: Array<ICollectionItemCollection> = [
       }
     ]
   }
-];
+};
 
 export default SHOP_DATA;

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { fEmptyVoid, fEmptyReturn, fArgVoid, fArgReturn } from '../../types/Functions';
+import { fEmptyVoid, fEmptyReturn, fArgVoid, fArgReturn } from '../../types/FunctionTypes';
 
 import './custom-button.styles.scss';
 

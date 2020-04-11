@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 import { History } from 'history';
 
-import { fArgVoid } from '../../types/Functions';
+import { fArgVoid } from '../../types/FunctionTypes';
 import { AppState } from '../../redux/_root-reducer';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
