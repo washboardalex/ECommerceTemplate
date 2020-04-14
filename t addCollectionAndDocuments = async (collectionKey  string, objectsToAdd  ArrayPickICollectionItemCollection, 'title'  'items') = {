@@ -1,0 +1,105 @@
+[1mdiff --git a/src/App.tsx b/src/App.tsx[m
+[1mindex 3485dcd..fd154f5 100644[m
+[1m--- a/src/App.tsx[m
+[1m+++ b/src/App.tsx[m
+[36m@@ -2,11 +2,14 @@[m [mimport React from 'react';[m
+ import { Route, Switch, Redirect } from 'react-router-dom';[m
+ import { connect } from 'react-redux';[m
+ import { fArgReturn } from './types/FunctionTypes';[m
+[31m-import { auth, createUserProfileDocument } from './firebase/firebase.utils';[m
+[32m+[m[32mimport { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';[m
+ import { setCurrentUser } from './redux/user/user.actions';[m
+ import { AppState } from './redux/_root-reducer';[m
+ import { selectCurrentUser } from './redux/user/user.selectors';[m
+ import { createStructuredSelector } from 'reselect';[m
+[32m+[m[32mimport { selectCollectionsForPreview } from './redux/shop/shop.selectors';[m
+[32m+[m[32mimport { Dispatch, AnyAction } from 'redux';[m
+[32m+[m[32mimport ICollectionItemCollection from './types/models/ICollectionItemCollection';[m
+ [m
+ import HomePage from './pages/homepage/homepage.component';[m
+ import ShopPage from './pages/shop/shop.component';[m
+[36m@@ -15,10 +18,13 @@[m [mimport SignInAndSignUp from './components/sign-in-and-sign-up/sign-in-and-sign-u[m
+ import Header from './components/header/header.component';[m
+ [m
+ import './App.css';[m
+[31m-import { Dispatch, AnyAction } from 'redux';[m
+[32m+[m[32mimport { findAllByTitle } from '@testing-library/react';[m
+[32m+[m[32mimport ICollectionItem from './types/models/ICollectionItem';[m
+[32m+[m
+ [m
+ interface IStateProps {[m
+[31m-  currentUser: any[m
+[32m+[m[32m  currentUser: any,[m
+[32m+[m[32m  collectionsArray: Array<ICollectionItemCollection>[m
+ }[m
+ [m
+ interface IDispatchProps {[m
+[36m@@ -33,7 +39,9 @@[m [mclass App extends React.Component<AppComponentProps, {} > {[m
+ [m
+   componentDidMount() {[m
+ [m
+[32m+[m[41m    [m
+     const setCurrentUser : fArgReturn = this.props.setCurrentUser;[m
+[32m+[m[32m    const collectionsArray : Array<ICollectionItemCollection> = this.props.collectionsArray;[m
+ [m
+     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {[m
+ [m
+[36m@@ -52,6 +60,14 @@[m [mclass App extends React.Component<AppComponentProps, {} > {[m
+ [m
+       } else {[m
+         setCurrentUser(null);[m
+[32m+[m
+[32m+[m[41m       [m
+[32m+[m
+[32m+[m[32m        addCollectionAndDocuments([m
+[32m+[m[32m          'collections',[m[41m [m
+[32m+[m[32m          collectionsArray.map(({title, items } : Pick<ICollectionItemCollection, 'title' | 'items'>) =>[m[41m [m
+[32m+[m[32m            ({title, items}))[m
+[32m+[m[32m        );[m
+       }[m
+     });[m
+   }[m
+[36m@@ -81,7 +97,8 @@[m [mclass App extends React.Component<AppComponentProps, {} > {[m
+ }[m
+ [m
+ const mapStateToProps = createStructuredSelector<AppState, IStateProps>({[m
+[31m-  currentUser: selectCurrentUser[m
+[32m+[m[32m  currentUser: selectCurrentUser,[m
+[32m+[m[32m  collectionsArray: selectCollectionsForPreview[m
+ });[m
+ [m
+ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({[m
+[1mdiff --git a/src/firebase/firebase.utils.ts b/src/firebase/firebase.utils.ts[m
+[1mindex 39238bf..57f4490 100644[m
+[1m--- a/src/firebase/firebase.utils.ts[m
+[1m+++ b/src/firebase/firebase.utils.ts[m
+[36m@@ -1,6 +1,8 @@[m
+ import * as firebase from 'firebase/app';[m
+ import 'firebase/firestore';[m
+ import 'firebase/auth';[m
+[32m+[m[32mimport ICollectionItemCollection from '../types/models/ICollectionItemCollection';[m
+[32m+[m[32mimport ICollectionItem from '../types/models/ICollectionItem';[m
+ [m
+ var app = firebase.initializeApp({[m
+     apiKey: "AIzaSyD3ZAGglpIXheEuryFUycfGEjRa5Je96p0",[m
+[36m@@ -16,6 +18,20 @@[m [mvar app = firebase.initializeApp({[m
+ export const auth = firebase.auth();[m
+ export const firestore = firebase.firestore();[m
+ [m
+[32m+[m
+[32m+[m[32mexport const addCollectionAndDocuments = async (collectionKey : string, objectsToAdd : Array<Pick<ICollectionItemCollection, 'title' | 'items'>>) => {[m
+[32m+[m[32m    const collectionRef = firestore.collection(collectionKey);[m
+[32m+[m
+[32m+[m[32m    const batch = firestore.batch();[m
+[32m+[m
+[32m+[m[32m    objectsToAdd.forEach(obj => {[m
+[32m+[m[32m        const newDocRef = collectionRef.doc();[m
+[32m+[m[32m        batch.set(newDocRef, obj);[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m[32m    return await batch.commit()[m
+[32m+[m[32m}[m
+[32m+[m
+ export const createUserProfileDocument = async(userAuth : any, additionalData? : any) => {[m
+     [m
+     if (!userAuth) return;[m
