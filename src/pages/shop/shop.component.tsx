@@ -12,6 +12,7 @@ import { Dispatch } from 'redux';
 import { updateCollections } from '../../redux/shop/shop.actions';
 import { fArgReturn } from '../../types/FunctionTypes';
 import { IShopData } from '../../types/models/IShopData';
+import WithSpinner from '../../components/with-spinner/with-spinner.component';
 
 
 interface IDispatchProps {
@@ -20,7 +21,18 @@ interface IDispatchProps {
 
 type ShopPageProps = IDispatchProps & IReactRouterProps;
 
-class ShopPage extends React.Component<ShopPageProps, {} > {
+interface ILocalState {
+    loading: boolean
+}
+
+const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+
+class ShopPage extends React.Component<ShopPageProps, ILocalState > {
+
+    state: ILocalState = {
+        loading: true
+    }
 
     unsubscribeFromSnapshot : () => any = () => false;
 
@@ -33,16 +45,25 @@ class ShopPage extends React.Component<ShopPageProps, {} > {
         this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
             updateCollections(collectionsMap);
+            this.setState({loading: false});
         });
     }
     
     render() {
         const { match } : ShopPageProps = this.props;
+        const { loading } : ILocalState = this.state;
 
         return (
             <div className='shop-page'>
-                <Route exact path={`${match.path}`} component={CollectionsOverview} />
-                <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+                <Route 
+                    exact path={`${match.path}`} 
+                    render={(props) => <CollectionsOverviewWithSpinner isLoading={loading} {...props} />} 
+                />
+
+                <Route 
+                    path={`${match.path}/:collectionId`} 
+                    render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} />} 
+                />
             </div>
         );
     }
@@ -50,6 +71,6 @@ class ShopPage extends React.Component<ShopPageProps, {} > {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     updateCollections: (collectionsMap : IShopData) => dispatch(updateCollections(collectionsMap))
-})
+});
 
 export default connect(null, mapDispatchToProps)(ShopPage);
