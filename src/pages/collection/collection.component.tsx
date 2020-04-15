@@ -25,9 +25,6 @@ type CollectionPageProps = IReactRouterProps & IStateProps;
 
 const CollectionPage : React.FunctionComponent<CollectionPageProps> = ({collection}) => {
     
-    console.log('collection is : ');
-    console.log(collection)
-
     const { title, items } : ICollectionItemCollection = collection;
 
     return (

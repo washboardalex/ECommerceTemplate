@@ -1,8 +1,7 @@
 import ICollectionItem from './ICollectionItem';
+import IFirebaseShopCollection from './IFirebaseShopCollection';
 
-export default interface ICollectionItemCollection {
-    id: number,
-    title: string,
-    routeName: string,
-    items: Array<ICollectionItem>
-  }
+export default interface ICollectionItemCollection extends IFirebaseShopCollection {
+  id: number,
+  routeName: string,
+}

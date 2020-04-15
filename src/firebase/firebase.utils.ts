@@ -1,6 +1,9 @@
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import ICollectionItemCollection from '../types/models/ICollectionItemCollection';
+import IFirebaseShopCollection from '../types/models/IFirebaseShopCollection';
+import { IShopData } from '../types/models/IShopData';
 
 var app = firebase.initializeApp({
     apiKey: "AIzaSyD3ZAGglpIXheEuryFUycfGEjRa5Je96p0",
@@ -28,6 +31,28 @@ export const addCollectionAndDocuments = async (collectionKey : string, objectsT
     });
 
     return await batch.commit()
+}
+
+export const convertCollectionsSnapshotToMap = (collections : any ) => {
+    let transformedCollection = 
+        collections.docs.map( (doc : firebase.firestore.DocumentData) : ICollectionItemCollection => {
+
+            const { title, items } : IFirebaseShopCollection = doc.data();
+
+            return {
+                routeName: encodeURI(title.toLowerCase()),
+                id: doc.id,
+                title, 
+                items
+            }
+        });
+    
+    type ReduceAccumulator = {[key : string] : ICollectionItemCollection};
+    return transformedCollection.reduce(
+        (accumulator : ReduceAccumulator, collection : ICollectionItemCollection ) => {
+            accumulator[collection.title.toLowerCase()] = collection;
+            return accumulator;
+        }, {});
 }
 
 export const createUserProfileDocument = async(userAuth : any, additionalData? : any) => {

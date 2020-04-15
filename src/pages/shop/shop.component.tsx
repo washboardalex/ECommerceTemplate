@@ -3,22 +3,53 @@ import ICollectionItemCollection from '../../types/models/ICollectionItemCollect
 import CollectionPreview from '../../components/collection-preview/collection-preview.component';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { createStructuredSelector } from 'reselect';
-import { selectCollections } from '../../redux/shop/shop.selectors';
-import { AppState } from '../../redux/_root-reducer';
-import { RouteComponentProps } from 'react-router';
+import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
+import { RouteComponentProps as IReactRouterProps } from 'react-router';
 import CollectionPage from '../collection/collection.component';
 
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
+import { Dispatch } from 'redux';
+import { updateCollections } from '../../redux/shop/shop.actions';
+import { fArgReturn } from '../../types/FunctionTypes';
+import { IShopData } from '../../types/models/IShopData';
 
 
-interface IShopPageProps extends RouteComponentProps {}
+interface IDispatchProps {
+    updateCollections: fArgReturn
+}
 
-const ShopPage = ({ match } : IShopPageProps) => (
-    <div className='shop-page'>
-        <Route exact path={`${match.path}`} component={CollectionsOverview} />
-        <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
-    </div>
-);
+type ShopPageProps = IDispatchProps & IReactRouterProps;
 
-export default ShopPage;
+class ShopPage extends React.Component<ShopPageProps, {} > {
+
+    unsubscribeFromSnapshot : () => any = () => false;
+
+    componentDidMount() {
+
+        const { updateCollections } = this.props;
+
+        const collectionRef = firestore.collection('collections');
+
+        this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+            const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+            updateCollections(collectionsMap);
+        });
+    }
+    
+    render() {
+        const { match } : ShopPageProps = this.props;
+
+        return (
+            <div className='shop-page'>
+                <Route exact path={`${match.path}`} component={CollectionsOverview} />
+                <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+            </div>
+        );
+    }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    updateCollections: (collectionsMap : IShopData) => dispatch(updateCollections(collectionsMap))
+})
+
+export default connect(null, mapDispatchToProps)(ShopPage);

@@ -1,0 +1,1 @@
+export const UPDATE_COLLECTIONS : string = 'UPDATE_COLLECTIONS';
