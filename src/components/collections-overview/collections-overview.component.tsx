@@ -10,7 +10,7 @@ import { AppState } from '../../redux/_root-reducer';
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
 
 
-interface ICollectionsOverviewProps {
+export interface ICollectionsOverviewProps {
     collections: Array<ICollectionItemCollection>
 }
 

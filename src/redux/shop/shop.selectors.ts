@@ -1,6 +1,5 @@
-import { createSelector, OutputSelector } from 'reselect';
+import { createSelector } from 'reselect';
 import { AppState } from '../_root-reducer';
-import { IShopData } from '../../types/models/IShopData';
 
 const selectShop = (state : AppState) => state.shop;
 
@@ -19,3 +18,13 @@ export const selectCollection = (collectionUrlParam: string) =>
         [selectCollections],
         collections => collections ? collections[collectionUrlParam] : []
     );
+
+export const selectIsCollectionFetching = createSelector(
+    [selectShop],
+    shop => {console.log(shop); console.log(shop.isFetching); return shop.isFetching}
+);
+
+export const selectIsCollectionLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections 
+);

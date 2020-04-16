@@ -7,7 +7,7 @@ import './menu-item.styles.scss';
 
 const MenuItem : React.FunctionComponent<IDirectoryItem & RouteComponentProps> = (props) => {
     
-    const {imageUrl, title, id, size, history, match, linkUrl} = props;
+    const {imageUrl, title, size, history, match, linkUrl} = props;
     const BgImgStyle: CSS.Properties = { backgroundImage: `url(${imageUrl})` };
 
     return (

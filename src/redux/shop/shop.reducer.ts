@@ -1,22 +1,41 @@
-import { Action } from 'redux';
 import { IShopData }  from '../../types/models/IShopData';
-import { UPDATE_COLLECTIONS } from './shop.types';
 import IActionWithPayload from '../../types/models/redux/IActionWithPayload';
+import { 
+    FETCH_COLLECTIONS_FAILURE,
+    FETCH_COLLECTIONS_START,
+    FETCH_COLLECTIONS_SUCCESS 
+} from './shop.types';
 
 interface IShopState {
-    collections: IShopData | null
+    collections: IShopData | null,
+    isFetching: boolean,
+    errorMessage?: string
 }
 
 const INITIAL_STATE : IShopState = {
-    collections: null
+    collections: null,
+    isFetching: false,
+    errorMessage: undefined
 }
 
 const shopReducer = (state : IShopState = INITIAL_STATE, action: IActionWithPayload) => {
     switch(action.type) {
-        case UPDATE_COLLECTIONS:
+        case FETCH_COLLECTIONS_START:
             return {
                 ...state,
-                collections: action.payload
+                isFetching: true
+            }
+        case FETCH_COLLECTIONS_SUCCESS:
+            return {
+                ...state,
+                collections: action.payload,
+                isFetching: false
+            }
+        case FETCH_COLLECTIONS_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                errorMessage: action.payload
             }
         default:
             return state
