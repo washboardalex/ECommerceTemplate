@@ -35,7 +35,7 @@ class App extends React.Component<AppComponentProps, {} > {
 
     const setCurrentUser : fArgReturn = this.props.setCurrentUser;
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth : any) => {
 
 
       if (userAuth) {

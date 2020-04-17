@@ -1,6 +1,8 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { Token } from 'react-stripe-checkout';
+import axios from 'axios';
+import {errors, IStripeError} from 'stripe';
 
 interface IStripeCheckoutButtonProps {
     price: number
@@ -12,7 +14,19 @@ const StripeCheckoutButton : React.FunctionComponent<IStripeCheckoutButtonProps>
 
     const onToken = (token : Token) : void => {
         console.log(token);
-        alert('payment successful!');
+        axios({
+            url: 'payment',
+            method: 'post',
+            data: {
+                amount: priceForStripe,
+                token
+            }
+        }).then(response =>{
+            alert('Payment Successful');
+        }).catch((error : IStripeError) => {
+            console.error('Payment error: ', error.message);
+            alert('There was an issue with your payment. Please ensure you have entered the correct credit card details.')
+        });
     }
 
     return(
@@ -28,7 +42,7 @@ const StripeCheckoutButton : React.FunctionComponent<IStripeCheckoutButtonProps>
             token={onToken}
             stripeKey={publishableKey}
         />
-    )
+    );
 }
 
 export default StripeCheckoutButton
