@@ -1,6 +1,5 @@
 import IDirectoryItem from '../../types/models/IDirectoryItem';
 import IActionWithPayload from '../../types/models/redux/IActionWithPayload';
-import { bindActionCreators } from 'redux';
 
 interface IDirectoryState {
     sections: Array<IDirectoryItem>

@@ -7,7 +7,7 @@ interface IWithSpinnerProps {
 }
 
 const WithSpinner = (WrappedComponent: React.ComponentType<any>) => {
-    const Spinner = ({ isLoading, ...otherProps} : object & IWithSpinnerProps) => 
+    const Spinner : React.FunctionComponent<object & IWithSpinnerProps> = ({ isLoading, ...otherProps}) => 
         (isLoading  
             ? (
                 <div className='spinner-overlay'>
@@ -16,7 +16,7 @@ const WithSpinner = (WrappedComponent: React.ComponentType<any>) => {
             )
             :
                 <WrappedComponent {...otherProps} />
-        )
+        );
 
     return Spinner;
 }

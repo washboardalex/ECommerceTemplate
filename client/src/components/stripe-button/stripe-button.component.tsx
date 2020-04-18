@@ -2,7 +2,7 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { Token } from 'react-stripe-checkout';
 import axios from 'axios';
-import {errors, IStripeError} from 'stripe';
+import {IStripeError} from 'stripe';
 
 interface IStripeCheckoutButtonProps {
     price: number

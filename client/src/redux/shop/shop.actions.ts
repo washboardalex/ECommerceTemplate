@@ -1,14 +1,13 @@
 import { IShopData } from '../../types/models/IShopData';
 import IActionWithPayload from '../../types/models/redux/IActionWithPayload';
 import { convertCollectionsSnapshotToMap, firestore } from '../../firebase/firebase.utils';
-import { Action, Dispatch, AnyAction } from 'redux';
+import { Action, Dispatch } from 'redux';
 import { 
     FETCH_COLLECTIONS_FAILURE,
     FETCH_COLLECTIONS_SUCCESS,
     FETCH_COLLECTIONS_START 
 } from './shop.types';
-import { fArgReturn } from '../../types/FunctionTypes';
-import { ThunkDispatch } from 'redux-thunk';
+
 
 export const fetchCollectionsStart = () : Action => ({
     type: FETCH_COLLECTIONS_START

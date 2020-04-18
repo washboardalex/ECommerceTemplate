@@ -1,22 +1,23 @@
 import React, { FormEvent, ChangeEvent } from 'react';
+import ObjectWithStringKey from '../../types/ObjectWithStringKey';
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-
 import './sign-up.styles.scss';
 
-interface ISignUpState {
+
+interface ISignUpState extends ObjectWithStringKey { //TS compiler doesnt like setState in handleChange event
     displayName: string,
     email: string,
     password: string,
     confirmPassword: string
 }
 
-class SignUp extends React.Component {
+class SignUp extends React.Component<{}, ISignUpState> {
     
-    state : ISignUpState = {
+    state = {
         displayName: '',
         email: '',
         password: '',

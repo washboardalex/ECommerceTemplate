@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import ICollectionItemCollection from '../../types/models/ICollectionItemCollection';
+import { AppState } from '../../redux/_root-reducer';
+import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
 
 import CollectionPreview from '../collection-preview/collection-preview.component'; 
 
 import './collections-overview.styles.scss';
-import ICollectionItemCollection from '../../types/models/ICollectionItemCollection';
-import { AppState } from '../../redux/_root-reducer';
-import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors';
 
 
 export interface ICollectionsOverviewProps {
     collections: Array<ICollectionItemCollection>
 }
 
-const CollectionsOverView = ({collections} : ICollectionsOverviewProps) => (
+const CollectionsOverView : React.FunctionComponent<ICollectionsOverviewProps> = ({collections} ) => (
     <div className='collections-overview'>
         {collections.map((collection : ICollectionItemCollection) => (
             <CollectionPreview key={collection.id} { ...collection } />
@@ -27,3 +27,5 @@ const mapStateToProps = createStructuredSelector<AppState, ICollectionsOverviewP
 })
 
 export default connect(mapStateToProps)(CollectionsOverView);
+
+

@@ -19,7 +19,7 @@ interface IReceivedProps {
 
 type CollectionItemProps = IDispatchProps & IReceivedProps
 
-const CollectionItem = ({ item, addItem } : CollectionItemProps) => {
+const CollectionItem : React.FunctionComponent<CollectionItemProps>= ({ item, addItem } ) => {
 
     const { name, price, imageUrl } : ICollectionItem = item;
     

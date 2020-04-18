@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import IDirectoryItem from '../../types/models/IDirectoryItem';
 import CSS from 'csstype';
+
 import './menu-item.styles.scss';
 
 const MenuItem : React.FunctionComponent<IDirectoryItem & RouteComponentProps> = (props) => {

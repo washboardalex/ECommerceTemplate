@@ -1,13 +1,15 @@
 import React from 'react';
 
-import './cart-item.styles.scss';
 import ICartItem from '../../types/models/ICartItem';
+
+import './cart-item.styles.scss';
+
 
 interface ICartItemComponentProps {
     item: ICartItem
 }
 
-const CartItem = ({ item: { imageUrl, price, name, quantity } } : ICartItemComponentProps) => (
+const CartItem : React.FunctionComponent<ICartItemComponentProps> = ({ item: { imageUrl, price, name, quantity } } ) => (
     <div className='cart-item'>
         <img src={imageUrl} alt='item' />
         <div className='item-details'>

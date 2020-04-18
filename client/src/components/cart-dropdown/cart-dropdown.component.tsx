@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
-import { History } from 'history';
+import { RouteComponentProps as IReactRouterProps } from 'react-router';
 
 import { fArgVoid } from '../../types/FunctionTypes';
 import { AppState } from '../../redux/_root-reducer';
@@ -25,13 +25,9 @@ interface IDispatchProps {
     toggleCartHidden: fArgVoid
 }
 
-interface IReactRouterProps {
-    history: History
-}
-
 type CartDropdownProps = IStateProps & IDispatchProps & IReactRouterProps
 
-const CartDropdown = ({ cartItems, history, toggleCartHidden } : CartDropdownProps) => {
+const CartDropdown : React.FunctionComponent<CartDropdownProps> = ({ cartItems, history, toggleCartHidden } ) => {
 
     return (
         <div className='cart-dropdown'>

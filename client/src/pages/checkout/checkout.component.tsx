@@ -11,13 +11,12 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 import './checkout.styles.scss';
 
 
-
 interface ICheckoutPageProps {
     cartItems: Array<ICartItem>,
     total: number
 }
 
-const CheckoutPage = ({ cartItems, total } : ICheckoutPageProps ) => (
+const CheckoutPage : React.FunctionComponent<ICheckoutPageProps> = ({ cartItems, total }) => (
     <div className='checkout-page'>
         <div className='checkout-header'>
             <div className='header-block'>

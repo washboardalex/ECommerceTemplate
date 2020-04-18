@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+
 import './form-input.styles.scss';
 
 interface IFormProps {
@@ -10,7 +11,7 @@ interface IFormProps {
     required?: boolean
 }
 
-const FormInput: React.FunctionComponent<IFormProps> = ({handleChange, name, label, value, type, required} : IFormProps) => (
+const FormInput: React.FunctionComponent<IFormProps> = ({handleChange, name, label, value, type, required}) => (
     <div className='group'>
         <input className='form-input' name={name} onChange={handleChange} type={type} required={required} />
         {

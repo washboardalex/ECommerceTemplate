@@ -3,9 +3,8 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import ICollectionItemCollection from '../types/models/ICollectionItemCollection';
 import IFirebaseShopCollection from '../types/models/IFirebaseShopCollection';
-import { IShopData } from '../types/models/IShopData';
 
-var app = firebase.initializeApp({
+firebase.initializeApp({
     apiKey: "AIzaSyD3ZAGglpIXheEuryFUycfGEjRa5Je96p0",
     authDomain: "e-commerce-toy-db.firebaseapp.com",
     databaseURL: "https://e-commerce-toy-db.firebaseio.com",

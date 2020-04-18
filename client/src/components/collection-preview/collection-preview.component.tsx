@@ -1,10 +1,14 @@
 import React from 'react';
-import CollectionItem from '../collection-item/collection-item.component';
-import './collection-preview.styles.scss';
 import ICollectionItemCollection from '../../types/models/ICollectionItemCollection';
 import ICollectionItem from '../../types/models/ICollectionItem';
 
-const CollectionPreview = ({title, items} : ICollectionItemCollection) => (
+import CollectionItem from '../collection-item/collection-item.component';
+
+import './collection-preview.styles.scss';
+
+
+
+const CollectionPreview : React.FunctionComponent<ICollectionItemCollection> = ({title, items} ) => (
 
     <div className='collection-preview'>
         <h1 className='title'>{title.toUpperCase()}</h1>
