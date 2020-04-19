@@ -21,7 +21,7 @@ interface IHeaderProps {
     hidden: boolean
 }
 
-const Header : React.FunctionComponent<IHeaderProps> = ({ currentUser, hidden }) => {
+const Header : React.FC<IHeaderProps> = ({ currentUser, hidden }) => {
 
     return (
     <div className='header'>

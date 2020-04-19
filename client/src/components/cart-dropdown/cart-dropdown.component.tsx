@@ -27,7 +27,7 @@ interface IDispatchProps {
 
 type CartDropdownProps = IStateProps & IDispatchProps & IReactRouterProps
 
-const CartDropdown : React.FunctionComponent<CartDropdownProps> = ({ cartItems, history, toggleCartHidden } ) => {
+const CartDropdown : React.FC<CartDropdownProps> = ({ cartItems, history, toggleCartHidden } ) => {
 
     return (
         <div className='cart-dropdown'>

@@ -23,7 +23,7 @@ interface IStateProps {
 
 type CollectionPageProps = IReactRouterProps & IStateProps;
 
-const CollectionPage : React.FunctionComponent<CollectionPageProps> = ({collection}) => {
+const CollectionPage : React.FC<CollectionPageProps> = ({collection}) => {
     
     const { title, items } : ICollectionItemCollection = collection;
 

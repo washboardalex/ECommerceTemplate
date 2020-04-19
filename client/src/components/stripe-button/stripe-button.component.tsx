@@ -8,7 +8,7 @@ interface IStripeCheckoutButtonProps {
     price: number
 }
 
-const StripeCheckoutButton : React.FunctionComponent<IStripeCheckoutButtonProps> = ({price}) => {
+const StripeCheckoutButton : React.FC<IStripeCheckoutButtonProps> = ({price}) => {
     const priceForStripe : number = price * 100;
     const publishableKey : string = 'pk_test_ZL2xekDcZTuJPk2uqkb8u0Jb';
 

@@ -14,7 +14,7 @@ interface IDirectoryProps {
     sections: Array<IDirectoryItem>
 }
 
-const Directory : React.FunctionComponent<IDirectoryProps> = ({ sections }) => (
+const Directory : React.FC<IDirectoryProps> = ({ sections }) => (
   <div className='directory-menu'>
       {sections.map(({ ...sectionProps }) => 
         <MenuItem key={sectionProps.id} {...sectionProps} />

@@ -20,7 +20,7 @@ interface IReceivedProps {
 
 type CheckoutItemProps = IDispatchProps & IReceivedProps;
 
-const CheckoutItem : React.FunctionComponent<CheckoutItemProps> = ({cartItem, clearItem, addItem, removeItem} ) => {
+const CheckoutItem : React.FC<CheckoutItemProps> = ({cartItem, clearItem, addItem, removeItem} ) => {
 
     const { imageUrl, name, quantity, price } : ICartItem = cartItem;
 

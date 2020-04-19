@@ -14,7 +14,7 @@ export interface ICollectionsOverviewProps {
     collections: Array<ICollectionItemCollection>
 }
 
-const CollectionsOverView : React.FunctionComponent<ICollectionsOverviewProps> = ({collections} ) => (
+const CollectionsOverView : React.FC<ICollectionsOverviewProps> = ({collections} ) => (
     <div className='collections-overview'>
         {collections.map((collection : ICollectionItemCollection) => (
             <CollectionPreview key={collection.id} { ...collection } />

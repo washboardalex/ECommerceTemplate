@@ -16,7 +16,7 @@ interface ICheckoutPageProps {
     total: number
 }
 
-const CheckoutPage : React.FunctionComponent<ICheckoutPageProps> = ({ cartItems, total }) => (
+const CheckoutPage : React.FC<ICheckoutPageProps> = ({ cartItems, total }) => (
     <div className='checkout-page'>
         <div className='checkout-header'>
             <div className='header-block'>
